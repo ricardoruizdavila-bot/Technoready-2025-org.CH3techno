@@ -52,7 +52,7 @@ scholar-mvc/
 │     ├─ PaperMappingTest.java
 │     └─ AuthorControllerTest.java    # optional
 ```
-
+```
 Google Scholar – PAPERS (primary)
 export SCHOLAR_MODE="papers"
 export SCHOLAR_API_BASE_URL="https://serpapi.com/search.json"
@@ -76,3 +76,4 @@ export SCHOLAR_KEY_HEADER=""
 export SCHOLAR_EXTRA_QUERY="engine=google_scholar_author&hl=es"
 
 # Enable name → author_id resolver
+```
