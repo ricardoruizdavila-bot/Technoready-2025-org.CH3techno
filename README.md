@@ -27,6 +27,7 @@ Maven 3.8+
 SerpAPI account (API Key) — https://serpapi.com/
 
 Project estructure
+```text
 scholar-mvc/
 ├─ pom.xml
 ├─ src/
@@ -50,6 +51,7 @@ scholar-mvc/
 │     ├─ PaperControllerTest.java
 │     ├─ PaperMappingTest.java
 │     └─ AuthorControllerTest.java    # optional
+```
 
 Google Scholar – PAPERS (primary)
 export SCHOLAR_MODE="papers"
