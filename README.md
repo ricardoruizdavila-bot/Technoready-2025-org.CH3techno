@@ -29,31 +29,59 @@ SerpAPI account (API Key) — https://serpapi.com/
 Project estructure
 ```text
 scholar-mvc/
-├─ pom.xml
-├─ src/
-│  ├─ main/java/org/CH3techno/scholar/
-│  │  ├─ App.java                     # entry point
-│  │  ├─ controller/
-│  │  │  ├─ PaperController.java      # C (papers)
-│  │  │  └─ AuthorController.java     # C (author, optional)
-│  │  ├─ service/
-│  │  │  └─ ScholarApiClient.java     # HTTP client (HttpClient5 + Jackson)
-│  │  ├─ view/
-│  │  │  ├─ ConsolePaperView.java     # V (papers)
-│  │  │  └─ ConsoleAuthorView.java    # V (author)
-│  │  └─ model/
-│  │     ├─ Paper.java
-│  │     ├─ PaperSearchResponse.java
-│  │     ├─ Author.java               # optional
-│  │     ├─ AuthorSearchResponse.java # optional
-│  │     └─ Publication.java          # optional (author’s articles)
-│  └─ test/java/org/CH3techno/scholar/
-│     ├─ PaperControllerTest.java
-│     ├─ PaperMappingTest.java
-│     └─ AuthorControllerTest.java    # optional
+│
+├── .idea/                          # IntelliJ IDEA configuration files
+├── .mvn/                           # Maven wrapper files
+│
+├── src/
+│   ├── main/
+│   │   └── java/org.CH3techno.scholar/
+│   │       ├── controller/         # Layer that manages application logic
+│   │       │   ├── AuthorController.java
+│   │       │   └── PaperController.java
+│   │       │
+│   │       ├── db/                 # Data access and persistence layer
+│   │       │   ├── ArticleDao.java
+│   │       │   ├── DbManager.java
+│   │       │   └── ResearcherDao.java
+│   │       │
+│   │       ├── model/              # Data models and entities
+│   │       │   ├── Author.java
+│   │       │   ├── AuthorSearchResponse.java
+│   │       │   ├── Paper.java
+│   │       │   ├── PaperSearchResponse.java
+│   │       │   └── Publication.java
+│   │       │
+│   │       ├── service/            # Business logic and API integrations
+│   │       │   ├── DbSeedService.java
+│   │       │   └── ScholarApiClient.java
+│   │       │
+│   │       ├── view/               # Console interface layer
+│   │       │   ├── ConsoleAuthorView.java
+│   │       │   └── ConsolePaperView.java
+│   │       │
+│   │       └── App.java            # Main entry point for program execution
+│   │
+│   └── test/
+│       └── java/org.CH3techno.scholar/
+│           ├── AuthorControllerTest.java
+│           ├── PaperControllerTest.java
+│           └── PaperMappingTest.java
+│
+├── target/                         # Maven build output directory
+│
+├── scholar.db                      # SQLite local database
+├── pom.xml                         # Maven configuration file
+├── .gitignore                      # Ignored files for Git
+├── CH3 SPRINT 1 PLAN ID 3340.pdf   # Sprint planning document
+└── README.md                       # Project documentation
+
 ```
 ```
-Google Scholar – PAPERS (primary)
+        Instructions for the aplicaction of some searchs of the program
+
+        #Google Scholar – PAPERS (primary)
+
 export SCHOLAR_MODE="papers"
 export SCHOLAR_API_BASE_URL="https://serpapi.com/search.json"
 export SCHOLAR_API_KEY="REPLACE_WITH_YOUR_API_KEY"
@@ -63,7 +91,7 @@ export SCHOLAR_KEY_PARAM="api_key"
 export SCHOLAR_KEY_HEADER=""
 export SCHOLAR_EXTRA_QUERY="engine=google_scholar&hl=es"
 
-Google Scholar – AUTHOR by name (optional)
+        #Google Scholar – AUTHOR by name (optional)
 
 export SCHOLAR_MODE="authors"
 export SCHOLAR_API_BASE_URL="https://serpapi.com/search.json"
@@ -76,4 +104,30 @@ export SCHOLAR_KEY_HEADER=""
 export SCHOLAR_EXTRA_QUERY="engine=google_scholar_author&hl=es"
 
 # Enable name → author_id resolver
+
+        Comand to BD seed and list SPRINT 3
+
+# PARTE QUE BUSCA LOS AUTORES Y DATOS TAMBIEN SE INSERTA TU SERPAPI KEY
+cd "/c/Users/NITRO 5/Documents/3-Techno ready/CH 3/org.CH3techno/scholar-mvc"
+
+# ENLACE Y LLAVE KEY
+export SCHOLAR_API_BASE_URL="https://serpapi.com/search.json"
+export SCHOLAR_API_KEY="TU KEY API FROM SERPAPI"
+
+# (opcional si usas doRequestWith, pero útil si reusas doRequest genérico)
+export SCHOLAR_KEY_PARAM="api_key"
+export SCHOLAR_QUERY_PARAM="q"
+export SCHOLAR_KEY_HEADER=""
+export SCHOLAR_EXTRA_QUERY=""
+
+mvn -q -DskipTests clean package
+
+# Limpieza y generacion de nuevas busquedas
+rm -f scholar.db
+#SEARCH ANOTHER AUTHOR YOU CHANGE THE LAST AUTORES
+java -jar target/scholar-mvc-1.0-SNAPSHOT.jar --seed-db "Albert Einstein" "Nikola Tesla" 
+java -Dfile.encoding=UTF-8 -jar target/scholar-mvc-1.0-SNAPSHOT.jar --list-db
+
+
+
 ```
