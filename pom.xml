@@ -47,6 +47,12 @@
             <version>1.7.36</version>
             <scope>runtime</scope>
         </dependency>
+        <!-- SQLite JDBC AGREGADO PARA SRPINT 3-->
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.45.3.0</version>
+        </dependency>
     </dependencies>
 
     <build>
